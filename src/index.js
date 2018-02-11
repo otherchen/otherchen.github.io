@@ -1,44 +1,32 @@
-/*
-  @todo:
-  1. add basic react structure
-  2. add sass capabilities (through webpack)
-  4. add auto deployment to github pages
-  5. buy keyboard and/or pixel 2
-  6. learn how to model/track/animate/color-grade
-*/
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { 
-  BrowserRouter as Router, 
+  HashRouter, 
   Switch,
   Route,
 } from 'react-router-dom';
+import HomePage from './HomePage';
+import MovieBlog from './MovieBlog';
+import NotFound from './NotFound';
 
-const Home = () => {
-  return <div>HOME PAGE</div>;
-}
+/** 
+* Injecting global styles
+*/
+import './styles/global';
 
-const MovieBlog = () => {
-  return <div>MOVIE BLOG</div>;
-}
-
+/** 
+* Note: Github Pages only supports hash routing.
+* Browser routing won't work since GH will treat it
+* as a backend route and thus, won't recognize it.
+*/
 const routes = (
-  <Router>
-        <div>
-          <Route path="/*" render={() => {
-            console.log("WHAT:!!!");
-            return (
-              <div>
-                what!!!
-                <Route path="/home" component={Home} />
-                <Route path="/movie-blog" component={MovieBlog} />
-              </div>
-            );
-          }} />
-        </div>
-
-  </Router>
+  <HashRouter>
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/movie-blog" component={MovieBlog} />
+      <Route component={NotFound} />
+    </Switch>
+  </HashRouter>
 );
 
 ReactDOM.render(routes, document.getElementById("content"));

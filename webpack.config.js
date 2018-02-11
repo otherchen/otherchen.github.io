@@ -3,12 +3,11 @@ const webpack = require('webpack')
 const config = {
     entry: __dirname + '/src/index.js',
     output: {
-        path: __dirname,
-        publicPath: '/dist',
+        path: __dirname + '/public/js',
         filename: 'bundle.js',
     },
     resolve: {
-        extensions: ['.js', '.jsx', '.css'],
+        extensions: ['.js', '.jsx'],
     },
     module: {
       rules: [
@@ -21,8 +20,7 @@ const config = {
     },
     devServer: { 
       inline: true,
-      publicPath: '/dist',
-      historyApiFallback: true,
+      publicPath: '/public/js',
     },
 };
 
